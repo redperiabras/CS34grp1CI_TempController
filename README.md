@@ -1,0 +1,2 @@
+# CS34grpCI_TempController
+Computational Intelligence Activity
