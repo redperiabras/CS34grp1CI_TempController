@@ -42,6 +42,7 @@ def fuzzify_error_dot_Zero(fError_dot):
 
     elif((fError_dot > 0) and (fError_dot < 2)):
         fError_dot_Zero = fError_dot_Zero_slope2
+        
     else:
         fError_dot_Zero = 1 #maximum membership value
 

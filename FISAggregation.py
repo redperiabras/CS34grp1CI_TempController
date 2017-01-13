@@ -7,14 +7,14 @@ def FISAggregation(Rule, PCC, PCNC, PCH):
 #*@Code Body
     for rule_no in range(9):
 
-        print("\nRule ",rule_no,": ",Rule[rule_no][0], Rule[rule_no][1],Rule[rule_no][2])
+        # print("\nRule ",rule_no,": ",Rule[rule_no][0], Rule[rule_no][1],Rule[rule_no][2])
         
         for index in range(201):
             fuzzy[rule_no][index] = 0
             
         for index in range(201):
 
-            print("Controller: ",PCC[index],PCNC[index],PCH[index])
+            # print("Controller: ",PCC[index],PCNC[index],PCH[index])
 
             if(Rule[rule_no][0] > 0):
 
@@ -49,7 +49,7 @@ def FISAggregation(Rule, PCC, PCNC, PCH):
                 else:
                     fuzzy[rule_no][index] = 0
 
-            print("X-Axis: ",index," : ",fuzzy[rule_no][index])
+            # print("X-Axis: ",index," : ",fuzzy[rule_no][index])
 
     #resetting to zero not needed. @fisAggregation already initialized in line 3
 

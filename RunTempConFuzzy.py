@@ -15,6 +15,7 @@
 
 import sys
 import os
+import matplotlib.pyplot as plt
 from EvaluateRules import EvaluateRules
 from EvaluateOutput import EvaluateOutput
 from FISAggregation import FISAggregation
@@ -26,27 +27,33 @@ def main(argv):
     print("Error Derivative: " + str(errordiv))
 
     rules = EvaluateRules(error, errordiv)
-    print("\n Rules: ")
-    print(rules)
-    print("\n")
+    # print("\n Rules: ")
+    # print(rules)
+    # print("\n")
     h1, h2, h3 = EvaluateOutput()
     ArrAgg = FISAggregation(rules, h1, h2, h3)
-    print("Aggregation: ")
-    for i in range (len(ArrAgg)):
-        print(i," : ",ArrAgg[i])
     Centroid = getCentroid(ArrAgg)
+    # print("Aggregation: ")
+    # for i in range (len(ArrAgg)):
+    #     print(i," : ",ArrAgg[i])
+    plt.plot(ArrAgg)
+    plt.title("Fuzzy Temperature Controller")
+    plt.grid(True)
+    plt.xlabel("Centroid: "+str(Centroid))
+    
+    plt.show()
 
     print("Centroid: " + str(Centroid))
 
 def setParams():
 
     try:
-        # temp_target = float(input("Enter Target Temperature: "))
-        # temp_curr = float(input("Enter Current Temperature: "))
-        # temp_prev = float(input("Enter Previous Temperature: "))
-        temp_target = 39
-        temp_curr = 40
-        temp_prev = 35
+        temp_target = float(input("Enter Target Temperature: "))
+        temp_curr = float(input("Enter Current Temperature: "))
+        temp_prev = float(input("Enter Previous Temperature: "))
+        # temp_target = 39
+        # temp_curr = 40
+        # temp_prev = 35
     except ValueError:
         print("Invalid Input")
         os.system("cls")
@@ -54,7 +61,8 @@ def setParams():
 
     errorPrev = temp_target - temp_prev
     error = temp_target - temp_curr
-    errordiv = error - errorPrev
+    errordiv = errorPrev - error
+
     return (error, errordiv)
 
 def getCentroid(ArrAgg):
@@ -65,16 +73,14 @@ def getCentroid(ArrAgg):
     centroidNum = 0
 
     for i in range(n):
-        print("x: ",i+1," - ", ArrAgg[i]," ")
-
+        # print("x: ",i+1," - ", ArrAgg[i]," ")
         centroidNum += (xAxis[i] * ArrAgg[i])
         centroidDenum += ArrAgg[i]
 
+    print("Centroid: ",centroidNum)
+    print("Centroid Denominator: ",centroidDenum)
 
-    print(centroidNum)
-    print(centroidDenum)
-
-    return centroidNum/centroidDenum
+    return round(centroidNum/centroidDenum, 4)
 
 if __name__ == "__main__":
     main(sys.argv)
